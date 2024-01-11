@@ -1,0 +1,69 @@
+.branchify-node {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+  }
+
+  .branchify-node > .branchify-switcher {
+    cursor: pointer;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+  }
+
+  .branchify-node__open > .branchify-switcher svg.closed,
+  .branchify-node:not(.branchify-node__open) > .branchify-switcher svg.open {
+    display: none;
+  }
+
+  .branchify-switcher svg {
+    width: 100%;
+    height: 100%;
+    fill: #555;
+  }
+
+  .branchify-node > .branchify-checkbox {
+    cursor: pointer;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .branchify-checkbox-checked {
+    background-color: #007bff;
+  }
+
+  .branchify-checkbox svg {
+    width: 100%;
+    height: 100%;
+    fill: #fff;
+    display: none;
+  }
+
+  .branchify-checkbox-checked svg {
+    display: block;
+  }
+
+  .branchify-label {
+    cursor: pointer;
+  }
+
+  .branchify-nodes {
+    display: none;
+    margin-left: 20px;
+  }
+
+  .branchify-node__open > .branchify-nodes {
+    display: block;
+  }
+
+  .branchify-placeholder {
+    margin-left: 20px;
+  }
