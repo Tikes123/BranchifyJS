@@ -40,7 +40,7 @@
 }
 
 .branchify-checkbox-checked {
-  background-color: #007bff;
+  background-color: #ff00c3;
 }
 
 .branchify-checkbox svg {
@@ -97,6 +97,23 @@
 .branchify-category-checkbox-checked svg {
   display: block;
 }
-.branchify-category-checkbox-checked {
-  background-color: #ff00c3;
+.add-btn {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  margin: 5px;
+  border: 1px solid #52258b;
+  color: #52258b;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-btn:hover {
+  border: 2px solid #ff00c3;
+  color: #ff00c3;
+}
+
+.add-btn svg {
+  margin-right: 8px;
 }
