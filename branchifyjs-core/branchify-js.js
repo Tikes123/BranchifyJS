@@ -1,3 +1,23 @@
+/*********************************************
+ *     BranchifyJS - Interactive Tree        *
+ *       with Checkbox Support               *
+ *                                           *
+ * Author: Tikeswar Sahoo                    *
+ * GitHub Repository:                        *
+ *   https://github.com/tikeswar/branchifyjs *
+ * License: MIT License                      *
+ *                                           *
+ * Description:                              *
+ * Explore an interactive tree structure     *
+ * with checkbox support using BranchifyJS.  *
+ * This JavaScript library allows you to     *
+ * create dynamic trees with collapsible     *
+ * nodes, checkboxes, and easy item addition.*
+ * Enhance your UI for categorization and    *
+ * item management. The code is customizable *
+ * and well-documented, making it a versatile*
+ * tool for various applications.            *
+ *********************************************/
       class BranchifyJS {
         constructor(containerId, treeData) {
           this.container = document.getElementById(containerId);
