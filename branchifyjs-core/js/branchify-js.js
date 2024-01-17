@@ -193,14 +193,16 @@ class BranchifyJS {
   }
 
   makeNodesSortable() {
-    $('#branchify').sortable({
-      handle: '.branchify-node',
+    $('#branchify .branchify-nodes').sortable({
+      items: '> .branchify-node',
+      handle: '.branchify-label',
+      connectWith: '#branchify .branchify-nodes',
       placeholder: 'branchify-node-placeholder',
       tolerance: 'pointer',
       update: (event, ui) => {
         this.handleNodeSorting(event, ui);
       },
-    });
+    }).disableSelection();
   }
 
   handleNodeSorting(event, ui) {
@@ -291,18 +293,19 @@ document.getElementById("addItem").addEventListener("click", function () {
 });
 // Make the tree sortable
 $(function() {
-    $("#branchify .branchify-nodes").sortable({
-      items: "> .branchify-node",
-      handle: ".branchify-label",
-      update: function(event, ui) {
-        // Reorder treeData based on the new order
-        const newOrder = [];
-        $(this).children(".branchify-node").each(function() {
-          const nodeId = $(this).attr("id");
-          const index = parseInt(nodeId.split("-").pop(), 10);
-          newOrder.push(treeData[index]);
-        });
-        treeData = newOrder;
-      }
-    }).disableSelection();
+  $("#branchify .branchify-nodes").sortable({
+    items: "> .branchify-node",
+    handle: ".branchify-label",
+    connectWith: "#branchify .branchify-nodes",
+    update: function(event, ui) {
+      // Reorder treeData based on the new order
+      const newOrder = [];
+      $(this).children(".branchify-node").each(function() {
+        const nodeId = $(this).attr("id");
+        const index = parseInt(nodeId.split("-").pop(), 10);
+        newOrder.push(treeData[index]);
+      });
+      treeData = newOrder;
+    }
+  }).disableSelection();
 });
