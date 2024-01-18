@@ -203,12 +203,24 @@ class BranchifyJS {
         this.handleNodeSorting(event, ui);
       },
     }).disableSelection();
+
+    $('#branchify').sortable({
+      items: '> .branchify-node',
+      handle: '.branchify-label',
+      connectWith: '#branchify .branchify-nodes',
+      placeholder: 'branchify-node-placeholder',
+      tolerance: 'pointer',
+      update: (event, ui) => {
+        this.handleTopLevelSorting(event, ui);
+      },
+    }).disableSelection();
   }
 
-  handleNodeSorting(event, ui) {
+  handleTopLevelSorting(event, ui) {
     const sortedNodeIds = $('#branchify').sortable('toArray');
     const sortedTreeData = this.rearrangeTreeData(this.treeData, sortedNodeIds);
     this.treeData = sortedTreeData;
+    this.createTree();
   }
 
   rearrangeTreeData(treeData, sortedNodeIds) {
