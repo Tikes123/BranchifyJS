@@ -59,11 +59,21 @@ class BranchifyJS {
     checkbox.addEventListener("dblclick", (event) => event.stopPropagation());
     node.appendChild(checkbox);
 
-    const label = document.createElement("label");
-    label.classList.add("branchify-label");
-    label.textContent = data.label;
-    label.addEventListener("click", () => this.toggleNode(node));
-    node.appendChild(label);
+    const labelContainer = document.createElement("span");
+      labelContainer.classList.add("label-container");
+
+      const label = document.createElement("span");
+      label.classList.add("branchify-label");
+      label.textContent = data.label;
+
+      const editButton = document.createElement("button");
+      editButton.classList.add("edit-button");
+      editButton.textContent = "🖋️";
+      editButton.addEventListener("click", () => this.toggleEdit(label));
+
+      labelContainer.appendChild(label);
+      labelContainer.appendChild(editButton);
+      node.appendChild(labelContainer);
 
     if (data.children) {
         const nodesContainer = document.createElement("ul");
@@ -76,6 +86,13 @@ class BranchifyJS {
 
     parent.appendChild(node);
   }
+
+    toggleEdit(label) {
+      label.contentEditable = !label.isContentEditable;
+      if (label.contentEditable) {
+        label.focus();
+      }
+    }
 
   createTree() {
     if (!this.rootExists) {

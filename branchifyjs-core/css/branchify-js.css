@@ -119,3 +119,7 @@
 .add-btn svg {
   margin-right: 8px;
 }
+.edit-button {
+  margin-left: 5px;
+  border: none;
+}
