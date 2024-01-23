@@ -119,6 +119,19 @@
 .add-btn svg {
   margin-right: 8px;
 }
+
+.divider-line{
+  margin: 0 10px;
+}
+.info-container{
+  gap: 10px !important;
+  display: inline-flex;
+}
+.info-container span{
+  border-right: 1px solid black !important;
+padding: 0 10px;
+}
+
 .edit-button {
   margin-left: 5px;
   border: none;

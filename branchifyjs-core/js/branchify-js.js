@@ -27,32 +27,32 @@ class BranchifyJS {
   }
 
   createTreeNode(parent, data) {
-      const nodeId = "branchify-node-" + Math.random().toString(36).substring(7);
+    const nodeId = "branchify-node-" + Math.random().toString(36).substring(7);
 
-      const node = document.createElement("li");
-      node.id = nodeId;
-      node.classList.add("branchify-node", "ui-state-default");
+    const node = document.createElement("li");
+    node.id = nodeId;
+    node.classList.add("branchify-node", "ui-state-default");
 
     const switcher = document.createElement("span");
     switcher.classList.add("branchify-switcher");
     switcher.innerHTML = `
-          <svg class="closed" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M7 10l5 5 5-5z"/>
-          </svg>
-          <svg class="open" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M7 14l5-5 5 5z"/>
-          </svg>
-        `;
+    <svg class="closed" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M7 10l5 5 5-5z"/>
+    </svg>
+    <svg class="open" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M7 14l5-5 5 5z"/>
+    </svg>
+  `;
     switcher.addEventListener("click", () => this.toggleNode(node));
     node.appendChild(switcher);
 
     const checkbox = document.createElement("span");
     checkbox.classList.add("branchify-checkbox");
     checkbox.innerHTML = `
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="bi bi-check2">
-            <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0"/>
-          </svg>
-        `;
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="bi bi-check2">
+      <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0"/>
+    </svg>
+  `;
     checkbox.addEventListener("click", (event) =>
       this.toggleCheckbox(event, data)
     );
@@ -60,39 +60,74 @@ class BranchifyJS {
     node.appendChild(checkbox);
 
     const labelContainer = document.createElement("span");
-      labelContainer.classList.add("label-container");
+    labelContainer.classList.add("label-container");
 
-      const label = document.createElement("span");
-      label.classList.add("branchify-label");
-      label.textContent = data.label;
+    const label = document.createElement("span");
+    label.classList.add("branchify-label");
+    label.textContent = data.label;
+    labelContainer.appendChild(label);
 
-      const editButton = document.createElement("button");
-      editButton.classList.add("edit-button");
-      editButton.textContent = "🖋️";
-      editButton.addEventListener("click", () => this.toggleEdit(label));
+    // Start of modification: Added divider line and spacing
+    const divider = document.createElement("span");
+    divider.classList.add("divider-line");
+    labelContainer.appendChild(divider);
 
-      labelContainer.appendChild(label);
-      labelContainer.appendChild(editButton);
-      node.appendChild(labelContainer);
+    const infoContainer = document.createElement("span");
+    infoContainer.classList.add("info-container");
+
+    const baselineLabel = document.createElement("span");
+    baselineLabel.textContent = "Baseline: ";
+    infoContainer.appendChild(baselineLabel);
+
+    const planStartLabel = document.createElement("span");
+    planStartLabel.textContent = "Plan Start: ";
+    infoContainer.appendChild(planStartLabel);
+
+    const planEndLabel = document.createElement("span");
+    planEndLabel.textContent = "Plan End: ";
+    infoContainer.appendChild(planEndLabel);
+
+    const teamLabel = document.createElement("span");
+    teamLabel.textContent = "Team: ";
+    infoContainer.appendChild(teamLabel);
+
+    const personLabel = document.createElement("span");
+    personLabel.textContent = "Person: ";
+    infoContainer.appendChild(personLabel);
+
+    const estimateLabel = document.createElement("span");
+    estimateLabel.textContent = "Estimate(Hour): ";
+    infoContainer.appendChild(estimateLabel);
+
+    labelContainer.appendChild(infoContainer);
+    // End of modification
+
+    const editButton = document.createElement("button");
+    editButton.classList.add("edit-button");
+    editButton.textContent = "🖋️";
+    editButton.addEventListener("click", () => this.toggleEdit(label));
+
+    labelContainer.appendChild(editButton);
+    node.appendChild(labelContainer);
 
     if (data.children) {
-        const nodesContainer = document.createElement("ul");
-        nodesContainer.classList.add("branchify-nodes", "hidden");
-        data.children.forEach((child) =>
-          this.createTreeNode(nodesContainer, child)
-        );
-        node.appendChild(nodesContainer);
-      }
+      const nodesContainer = document.createElement("ul");
+      nodesContainer.classList.add("branchify-nodes", "hidden");
+      data.children.forEach((child) =>
+        this.createTreeNode(nodesContainer, child)
+      );
+      node.appendChild(nodesContainer);
+    }
 
     parent.appendChild(node);
   }
 
-    toggleEdit(label) {
-      label.contentEditable = !label.isContentEditable;
-      if (label.contentEditable) {
-        label.focus();
-      }
+  toggleEdit(label) {
+    label.contentEditable = !label.isContentEditable;
+    if (label.contentEditable) {
+      label.focus();
     }
+  }
 
   createTree() {
     if (!this.rootExists) {
@@ -210,31 +245,35 @@ class BranchifyJS {
   }
 
   makeNodesSortable() {
-    $('#branchify .branchify-nodes').sortable({
-      items: '> .branchify-node',
-      handle: '.branchify-label',
-      connectWith: '#branchify .branchify-nodes',
-      placeholder: 'branchify-node-placeholder',
-      tolerance: 'pointer',
-      update: (event, ui) => {
-        this.handleNodeSorting(event, ui);
-      },
-    }).disableSelection();
+    $("#branchify .branchify-nodes")
+      .sortable({
+        items: "> .branchify-node",
+        handle: ".branchify-label",
+        connectWith: "#branchify .branchify-nodes",
+        placeholder: "branchify-node-placeholder",
+        tolerance: "pointer",
+        update: (event, ui) => {
+          this.handleNodeSorting(event, ui);
+        },
+      })
+      .disableSelection();
 
-    $('#branchify').sortable({
-      items: '> .branchify-node',
-      handle: '.branchify-label',
-      connectWith: '#branchify .branchify-nodes',
-      placeholder: 'branchify-node-placeholder',
-      tolerance: 'pointer',
-      update: (event, ui) => {
-        this.handleTopLevelSorting(event, ui);
-      },
-    }).disableSelection();
+    $("#branchify")
+      .sortable({
+        items: "> .branchify-node",
+        handle: ".branchify-label",
+        connectWith: "#branchify .branchify-nodes",
+        placeholder: "branchify-node-placeholder",
+        tolerance: "pointer",
+        update: (event, ui) => {
+          this.handleTopLevelSorting(event, ui);
+        },
+      })
+      .disableSelection();
   }
 
   handleTopLevelSorting(event, ui) {
-    const sortedNodeIds = $('#branchify').sortable('toArray');
+    const sortedNodeIds = $("#branchify").sortable("toArray");
     const sortedTreeData = this.rearrangeTreeData(this.treeData, sortedNodeIds);
     this.treeData = sortedTreeData;
     this.createTree();
@@ -321,20 +360,24 @@ document.getElementById("addItem").addEventListener("click", function () {
   }
 });
 // Make the tree sortable
-$(function() {
-  $("#branchify .branchify-nodes").sortable({
-    items: "> .branchify-node",
-    handle: ".branchify-label",
-    connectWith: "#branchify .branchify-nodes",
-    update: function(event, ui) {
-      // Reorder treeData based on the new order
-      const newOrder = [];
-      $(this).children(".branchify-node").each(function() {
-        const nodeId = $(this).attr("id");
-        const index = parseInt(nodeId.split("-").pop(), 10);
-        newOrder.push(treeData[index]);
-      });
-      treeData = newOrder;
-    }
-  }).disableSelection();
+$(function () {
+  $("#branchify .branchify-nodes")
+    .sortable({
+      items: "> .branchify-node",
+      handle: ".branchify-label",
+      connectWith: "#branchify .branchify-nodes",
+      update: function (event, ui) {
+        // Reorder treeData based on the new order
+        const newOrder = [];
+        $(this)
+          .children(".branchify-node")
+          .each(function () {
+            const nodeId = $(this).attr("id");
+            const index = parseInt(nodeId.split("-").pop(), 10);
+            newOrder.push(treeData[index]);
+          });
+        treeData = newOrder;
+      },
+    })
+    .disableSelection();
 });
