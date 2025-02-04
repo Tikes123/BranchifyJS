@@ -1,6 +1,6 @@
 # Hi there, I'm Tikeswar Sahoo! 👋
 
-📢 **Nominate (@TikeswarSahoo) as GitHub Star** if you appreciate my work and contributions to open source! ⭐
+📢 **Nominate (@Tikes123) as GitHub Star** if you appreciate my work and contributions to open source! ⭐
 
 ---
 
@@ -25,22 +25,20 @@ I am a **Full-Stack Developer** passionate about building web applications and c
 ---
 
 ## 📬 Get In Touch
-- [💼 LinkedIn](#)
-- [🐦 Twitter](#)
-- [🌐 Portfolio](#)
-- 📧 Email: [Your Email Here]
+- [💼 LinkedIn](https://www.linkedin.com/in/tikeswarsahoo/)
+- 📧 Email: [tikeswarsahoo7@gmail.com]
 
 ---
 
 ## 📊 GitHub Stats
-![Tikeswar's GitHub Stats](https://github-readme-stats.vercel.app/api?username=TikeswarSahoo&show_icons=true&theme=radical)
+![Tikeswar's GitHub Stats](https://github-readme-stats.vercel.app/api?username=tikes123&show_icons=true&theme=radical)
 
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=TikeswarSahoo&layout=compact&theme=radical)
+![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=tikes123&layout=compact&theme=radical)
 
 ---
 
 ## 🏆 GitHub Trophies
-![GitHub Trophies](https://github-profile-trophy.vercel.app/?username=TikeswarSahoo&theme=radical)
+![GitHub Trophies](https://github-profile-trophy.vercel.app/?username=tikes123&theme=radical)
 
 ---
 
